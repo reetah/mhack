@@ -1,0 +1,79 @@
+[{
+    "label": "top",
+    "type": [{
+        "label": "jacket",
+        "sub-type": [{
+            "label": "heavyJacket"
+        }, {
+            "label": "mediumJacket"
+        }, {
+            "label": "lightJacket"
+        }]
+    }, {
+        "label": "LongSleeves",
+        "sub-type": [{
+            "label": "heavySweater"
+        }, {
+            "label": "lightSweater"
+        }, {
+            "label": "shirt"
+        }]
+    }, {
+        "label": "Short Sleeves",
+        "sub-type": [{
+            "label": "tShirt"
+        }, {
+            "label": "tank"
+        }]
+    }]
+}, {
+    "label": "bottom",
+    "type": [{
+        "label": "long",
+        "sub-type": [{
+            "label": "jeans"
+        }, {
+            "label": "pants"
+        }, {
+            "label": "leggings"
+        }]
+    }, {
+        "label": "short",
+        "sub-type": [{
+            "label": "short"
+        }, {
+            "label": "skirt"
+        }]
+    }]
+}, {
+    "label": "feet",
+    "type": [{
+        "label": "boots/shoes",
+        "sub-type": [{
+            "label": "winterBoot"
+        }, {
+            "label": "rainboot"
+        }, {
+            "label": "longboot"
+        }, {
+            "label": "ankleboot"
+        }, {
+            "label": "flats"
+        }, {
+            "label": "oxfords"
+        }, {
+            "label": "boatshoes"
+        }, {
+            "label": "sandals"
+        }, {
+            "label": "heels"
+        }]
+    }, {
+        "label": "socks",
+        "sub-type": [{
+            "label": "stockings"
+        }, {
+            "label": "shortsocks"
+        }]
+    }]
+}]
