@@ -114,20 +114,25 @@ $(document).ready(function() {
     $.getJSON("data/type.json", function(data) {
         //console.log(data);
         typeData = data;
-        loadType(typeData);
+        loadCategories(typeData);
     });
 });
 
 
 
 
-var loadType = function(typeData) {
+var loadCategories = function(typeData) {
     console.log(typeData);
     for (var i = 0; i < typeData.length; i++) {
-        $("#categories").append("<div class='category'>" + typeData[i].label + "</div>")
+        $("#categories").append("<div class='category' onclick='loadType(\"" + typeData[i].label + "\");'>" + typeData[i].label + "</div>")
     }
 
     $(".category").css("width", "calc(" + 1 / typeData.length * 100 + "% - 2px");
 
 
+}
+
+var loadType = function(type) {
+    console.log(type);
+    
 }

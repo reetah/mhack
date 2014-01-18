@@ -19,7 +19,7 @@
             "label": "shirt"
         }]
     }, {
-        "label": "Short Sleeves",
+        "label": "ShortSleeves",
         "sub-type": [{
             "label": "tShirt"
         }, {
@@ -48,7 +48,7 @@
 }, {
     "label": "feet",
     "type": [{
-        "label": "boots/shoes",
+        "label": "boots_shoes",
         "sub-type": [{
             "label": "winterBoot"
         }, {
