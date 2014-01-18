@@ -2,16 +2,16 @@ var launch = function() {
     console.log("let's do this!");
 }
 var forecast;
-var getForecast = function(state, airport){
+var getForecast = function(state, airport) {
     $.ajax({
         url: "http://api.wunderground.com/api/6a636cdd571ca60f/forecast/q/" + state + "/" + airport + ".json",
         dataType: "jsonp",
         success: function(parsed_json) {
             console.log(parsed_json);
-            forecast=parsed_json;
+            forecast = parsed_json;
             var lowF = parsed_json.forecast.simpleforecast.forecastday[0].low.fahrenheit;
-           var highF = parsed_json.forecast.simpleforecast.forecastday[0].high.fahrenheit;
-           alert("Today has a low of " + lowF + "  F and a high of " + highF + " F.");
+            var highF = parsed_json.forecast.simpleforecast.forecastday[0].high.fahrenheit;
+            //alert("Today has a low of " + lowF + "  F and a high of " + highF + " F.");
         }
     });
 }
@@ -23,7 +23,7 @@ var getWeather = function(state, airport) {
         success: function(parsed_json) {
             var location = parsed_json['location']['city'];
             var temp_f = parsed_json['current_observation']['temp_f'];
-            alert("Current temperature in " + location + " is: " + temp_f + " F.");
+            //alert("Current temperature in " + location + " is: " + temp_f + " F.");
         }
     });
 }
@@ -37,6 +37,8 @@ var getStation = function(lat, lan) {
             console.log(parsed_json);
             station = parsed_json;
             wanted = station.location.nearby_weather_stations.airport.station[0];
+            $("#location_text").val(wanted.city + ", " + wanted.state);
+
             getWeather(wanted.state, wanted.city);
             getForecast(wanted.state, wanted.city);
         }
@@ -105,3 +107,27 @@ function handleNoGeolocation(errorFlag) {
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
+
+var typeData;
+
+$(document).ready(function() {
+    $.getJSON("data/type.json", function(data) {
+        //console.log(data);
+        typeData = data;
+        loadType(typeData);
+    });
+});
+
+
+
+
+var loadType = function(typeData) {
+    console.log(typeData);
+    for (var i = 0; i < typeData.length; i++) {
+        $("#categories").append("<div class='categories'>" + typeData[i].label + "</div>")
+    }
+
+    $(".categories").css("width", "calc(" + 1 / typeData.length * 100 + "% - 2px");
+
+
+}
