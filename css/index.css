@@ -73,7 +73,7 @@ html, body, #map-canvas {
 	background-color: blue;
 }
 
-#sub-types{
+#subtypes{
 	width:100%;
 	height:100px;
 	background-color: yellow;
@@ -90,7 +90,7 @@ html, body, #map-canvas {
 .category{
 	height:calc( 100% - 2px);
 	display:inline-block;
-	font-size: 200%;
+	font-size: 2vw;
 	text-align: center;
 	line-height: 100px;
 	border:solid 1px;
@@ -103,7 +103,7 @@ html, body, #map-canvas {
 .type{
 	height:calc(100% - 2px);
 	display:inline-block;
-	font-size: 200%;
+	font-size: 2vw;
 	text-align: center;
 	line-height: 100px;
 	border:solid 1px;
@@ -111,4 +111,18 @@ html, body, #map-canvas {
 }
 .type:hover{
 	background-color: cyan;
+}
+
+.subtype{
+	height:calc(100% - 2px);
+	display:inline-block;
+	
+	text-align: center;
+	line-height: 100px;
+	border:solid 1px;
+	cursor:pointer;
+
+}
+.subtype:hover{
+	background-color: beige;
 }
