@@ -134,5 +134,19 @@ var loadCategories = function(typeData) {
 
 var loadType = function(type) {
     console.log(type);
-    
+    var currentType;
+    //console.log(typeData);
+    for (var i = 0; i < typeData.length; i++) {
+        if (typeData[i].label == type) {
+            currentType = typeData[i];
+            console.log(currentType);
+            break;
+        }
+    }
+    $("#types").html("");
+    for (var i = 0; i < currentType.type.length; i++){
+        $("#types").append("<div class = 'type' onclick='loadType(\"" + currentType.type[i].label + "\");'>" + currentType.type[i].label + "</div>")
+    }
+
+    $(".type").css("width", "calc(" + 1 / currentType.type.length * 100 + "% - 2px");
 }
