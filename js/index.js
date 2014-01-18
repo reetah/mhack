@@ -116,7 +116,9 @@ $(document).ready(function() {
         //console.log(data);
         typeData = data;
         loadCategories(typeData);
+        dropLoadCat();
     });
+
 
     $.getJSON("data/mock.json", function(data) {
         //console.log(data);
@@ -124,6 +126,7 @@ $(document).ready(function() {
         loadCloset(closet);
 
     });
+
 
 
     $(document).on('click', '.cloth', function(e) {
@@ -205,3 +208,23 @@ var showAdd = function() {
 }
 
 //binder
+
+
+
+
+
+
+var dropLoadCat = function() {
+    for (var i = 0; i < typeData.length; i++) {
+        $("#select").append("<option value=\"" + typeData[i].label + "\">"+typeData[i].label+"</option>")
+    } 
+}
+
+var dropLoadType = function(type) {
+    for (var i = 0; i < typeData.type.length; i++){
+        if (typeData.type[i] == type) {
+            $("#select").append("<option value=\"" + typeData[i].label + "\">"+typeData[i].label+"</option>")
+        }
+    }
+
+}
