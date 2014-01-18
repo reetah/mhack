@@ -79,7 +79,7 @@ function initialize() {
             console.log(pos);
             posi = pos;
             map.setCenter(pos);
-            getStation(pos.d, pos.e);
+            //getStation(pos.d, pos.e);
         }, function() {
             handleNoGeolocation(true);
         });
