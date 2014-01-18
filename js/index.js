@@ -124,10 +124,10 @@ $(document).ready(function() {
 var loadType = function(typeData) {
     console.log(typeData);
     for (var i = 0; i < typeData.length; i++) {
-        $("#categories").append("<div class='categories'>" + typeData[i].label + "</div>")
+        $("#categories").append("<div class='category'>" + typeData[i].label + "</div>")
     }
 
-    $(".categories").css("width", "calc(" + 1 / typeData.length * 100 + "% - 2px");
+    $(".category").css("width", "calc(" + 1 / typeData.length * 100 + "% - 2px");
 
 
 }

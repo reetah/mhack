@@ -87,7 +87,7 @@ html, body, #map-canvas {
 }
 
 
-.categories{
+.category{
 	height:calc( 100% - 2px);
 	display:inline-block;
 	font-size: 200%;
@@ -96,6 +96,6 @@ html, body, #map-canvas {
 	border:solid 1px;
 	cursor:pointer;
 }
-.categories:hover{
+.category:hover{
 	background-color: pink;
 }
