@@ -1,0 +1,51 @@
+#big_button{
+	position: absolute;
+	height: 300px;
+	display: none;
+	width:300px;
+	background-color: blue;
+	font-size: 200%;
+	text-align: center;
+	line-height: 300px;
+	left:50%;
+	margin-left: -150px;
+	top:50%;
+	margin-top: -150px;
+	cursor: pointer;
+	border-radius: 30px;
+}
+
+#big_button:hover{
+	background-color: red;
+	font-size: 300%;
+}
+
+#location{
+	font-size: 200%
+}
+
+#location>input{
+	width: calc( 100% - 100px);
+	height: 56px;
+	font-size: 40px;
+}
+
+#confirm{
+    display: inline-block;
+	
+    width: 100px;
+    height: 56px;
+    position: relative;
+    text-align: center;
+    top: 5px;
+    font-size: 19px;
+    background-color: grey;
+    line-height: 28px;
+}
+
+
+html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
