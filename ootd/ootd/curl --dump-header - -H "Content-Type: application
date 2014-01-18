@@ -1,1 +1,0 @@
-curl --dump-header - -H "Content-Type: application/json" -X POST --data '{"clothes": [{"clothing": {"brand": "brand"}}], "name": "user"}' http://localhost:8000/api/v1/user/
