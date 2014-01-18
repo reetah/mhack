@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Clothing(models.Model):
-	#user = models.ForeignKey(User)
 	name = models.CharField(max_length=200)
 	category = models.CharField(max_length=200)
 	generalType = models.CharField(max_length=200)
@@ -19,9 +18,14 @@ class Clothing(models.Model):
 	def __unicode__(self):
 		return self.name
 
+class ThroughClothes(models.Model):
+	clothing = models.ForeignKey('Clothing')
+	user = models.ForeignKey('User')
+	weight = models.IntegerField(null = True, blank = True)
+
 class User(models.Model):
 	name = models.CharField(max_length=200)
-	clothes = models.ManyToManyField(Clothing)
+	clothes = models.ManyToManyField(Clothing, through='ThroughClothes', null = True, blank = True)
 
 	def __unicode__(self):
 		return self.name		
