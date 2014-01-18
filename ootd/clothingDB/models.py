@@ -18,14 +18,14 @@ class Clothing(models.Model):
 	def __unicode__(self):
 		return self.name
 
-class ThroughClothes(models.Model):
-	clothing = models.ForeignKey('Clothing')
-	user = models.ForeignKey('User')
-	weight = models.IntegerField(null = True, blank = True)
+#class ThroughClothes(models.Model):
+#	clothing = models.ForeignKey('Clothing')
+#	user = models.ForeignKey('User')
+#	weight = models.IntegerField(null = True, blank = True)
 
-class User(models.Model):
-	name = models.CharField(max_length=200)
-	clothes = models.ManyToManyField(Clothing, through='ThroughClothes', null = True, blank = True)
+#class User(models.Model):
+#	name = models.CharField(max_length=200)
+#	clothes = models.ManyToManyField(Clothing, through='ThroughClothes', null = True, blank = True)
 
-	def __unicode__(self):
-		return self.name		
+#	def __unicode__(self):
+#		return self.name		
