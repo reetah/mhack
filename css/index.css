@@ -21,8 +21,7 @@
 }
 
 #location{
-	font-size: 200%
-}
+	font-size: 235%;}
 
 #location>input{
 	width: calc( 100% - 100px);
@@ -41,6 +40,7 @@
     font-size: 19px;
     background-color: grey;
     line-height: 28px;
+    cursor: pointer;
 }
 
 

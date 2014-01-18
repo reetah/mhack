@@ -1,6 +1,20 @@
 var launch = function() {
     console.log("let's do this!");
 }
+var forecast;
+var getForecast = function(state, airport){
+    $.ajax({
+        url: "http://api.wunderground.com/api/6a636cdd571ca60f/forecast/q/" + state + "/" + airport + ".json",
+        dataType: "jsonp",
+        success: function(parsed_json) {
+            console.log(parsed_json);
+            forecast=parsed_json;
+            var lowF = parsed_json.forecast.simpleforecast.forecastday[0].low.fahrenheit;
+           var highF = parsed_json.forecast.simpleforecast.forecastday[0].high.fahrenheit;
+           alert("Today has a low of " + lowF + "  F and a high of " + highF + " F.");
+        }
+    });
+}
 
 var getWeather = function(state, airport) {
     $.ajax({
@@ -9,7 +23,7 @@ var getWeather = function(state, airport) {
         success: function(parsed_json) {
             var location = parsed_json['location']['city'];
             var temp_f = parsed_json['current_observation']['temp_f'];
-            alert("Current temperature in " + location + " is: " + temp_f);
+            alert("Current temperature in " + location + " is: " + temp_f + " F.");
         }
     });
 }
@@ -24,6 +38,7 @@ var getStation = function(lat, lan) {
             station = parsed_json;
             wanted = station.location.nearby_weather_stations.airport.station[0];
             getWeather(wanted.state, wanted.city);
+            getForecast(wanted.state, wanted.city);
         }
     });
 }
