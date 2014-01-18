@@ -2,12 +2,44 @@ var launch = function() {
     console.log("let's do this!");
 }
 
+var getWeather = function(state, airport) {
+    $.ajax({
+        url: "http://api.wunderground.com/api/6a636cdd571ca60f/geolookup/conditions/q/" + state + "/" + airport + ".json",
+        dataType: "jsonp",
+        success: function(parsed_json) {
+            var location = parsed_json['location']['city'];
+            var temp_f = parsed_json['current_observation']['temp_f'];
+            alert("Current temperature in " + location + " is: " + temp_f);
+        }
+    });
+}
+var station;
+
+var getStation = function(lat, lan) {
+    $.ajax({
+        url: "http://api.wunderground.com/api/6a636cdd571ca60f/geolookup/q/" + lat + "," + lan + ".json",
+        dataType: "jsonp",
+        success: function(parsed_json) {
+            console.log(parsed_json);
+            station = parsed_json;
+            wanted = station.location.nearby_weather_stations.airport.station[0];
+            getWeather(wanted.state, wanted.city);
+        }
+    });
+}
+
+
+
+
+//google map part
+
 
 // Note: This example requires that you consent to location sharing when
 // prompted by your browser. If you see a blank space instead of the map, this
 // is probably because you have denied permission for location sharing.
 
 var map;
+var posi;
 
 function initialize() {
     var mapOptions = {
@@ -27,8 +59,10 @@ function initialize() {
                 position: pos,
                 content: 'Location found using HTML5.'
             });
-
+            console.log(pos);
+            posi = pos;
             map.setCenter(pos);
+            getStation(pos.d, pos.e);
         }, function() {
             handleNoGeolocation(true);
         });
