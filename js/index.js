@@ -1,6 +1,7 @@
 var launch = function() {
     console.log("let's do this!");
 }
+
 var forecast;
 var getForecast = function(state, airport) {
     $.ajax({
@@ -23,7 +24,7 @@ var getWeather = function(state, airport) {
         success: function(parsed_json) {
             var location = parsed_json['location']['city'];
             var temp_f = parsed_json['current_observation']['temp_f'];
-            //alert("Current temperature in " + location + " is: " + temp_f + " F.");
+            alert("Current temperature in " + location + " is: " + temp_f + " F.");
         }
     });
 }
@@ -109,12 +110,25 @@ function handleNoGeolocation(errorFlag) {
 google.maps.event.addDomListener(window, 'load', initialize);
 
 var typeData;
-
+var closet;
 $(document).ready(function() {
     $.getJSON("data/type.json", function(data) {
         //console.log(data);
         typeData = data;
         loadCategories(typeData);
+    });
+
+    $.getJSON("data/mock.json", function(data) {
+        //console.log(data);
+        closet = data;
+        loadCloset(closet);
+
+    });
+
+
+    $(document).on('click', '.cloth', function(e) {
+        e.preventDefault();
+        console.log($(this)[0].id);
     });
 });
 
@@ -146,32 +160,46 @@ var loadType = function(type) {
         }
     }
     $("#types").html("");
-    for (var i = 0; i < currentType.type.length; i++){
+    for (var i = 0; i < currentType.type.length; i++) {
         $("#types").append("<div class = 'type' onclick='loadSubtype(\"" + currentType.type[i].label + "\");'>" + currentType.type[i].label + "</div>")
     }
 
     $(".type").css("width", "calc(" + 1 / currentType.type.length * 100 + "% - 2px");
+    $("#subtypes").html("");
 }
 
-var loadSubtype = function(subType){
+var loadSubtype = function(subType) {
     var currentSubTypes;
     console.log(subType);
-    for (var i = 0; i < currentType.type.length; i++){
-        if (subType == currentType.type[i].label){
+    for (var i = 0; i < currentType.type.length; i++) {
+        if (subType == currentType.type[i].label) {
             currentSubTypes = currentType.type[i].subtypes;
             console.log(currentSubTypes);
             break;
         }
     }
     $("#subtypes").html("");
-  //          console.log(currentSubTypes[0].label);
-    for (var i = 0; i < currentSubTypes.length; i++){
-         $("#subtypes").append("<div class = 'subtype' onclick = 'loadClothes(\"" + currentSubTypes[i].label + "\");'>"+ currentSubTypes[i].label + "</div>")
+    //          console.log(currentSubTypes[0].label);
+    for (var i = 0; i < currentSubTypes.length; i++) {
+        $("#subtypes").append("<div class = 'subtype' onclick = 'loadClothes(\"" + currentSubTypes[i].label + "\");'>" + currentSubTypes[i].label + "</div>")
     }
     $(".subtype").css("width", "calc(" + 1 / currentSubTypes.length * 100 + "% - 2px");
-    $(".subtype").css("font-size", 600/currentSubTypes.length  + "% ");
+    $(".subtype").css("font-size", 600 / currentSubTypes.length + "% ");
 }
 
-var loadClothes = function(subtype){
+var loadClothes = function(subtype) {
     console.log(subtype);
 }
+
+
+var loadCloset = function(closet) {
+    console.log(closet);
+    for (var i = 0; i < closet.length; i++) {
+        $("#selection").append("<div class='cloth' id='" + closet[i].name + "'style='background-image:url(data/pictures/" + closet[i].picURL + ")'></div>");
+
+    }
+}
+
+
+
+//binder

@@ -1,0 +1,63 @@
+[{
+        "user": "marySue",
+        "name": "blackLightJacket",
+        "category": "top",
+        "generalType": "jacket",
+        "subType": "lightJacket",
+        "colour": "black",
+        "weatherIndex": "6",
+        "picURL": "lightJacket.jpg",
+        "brand": "HM",
+        "url": "http://www.hm.com/ca/product/21072?article=21072-A"
+    },
+
+    {
+        "user": "marySue",
+        "name": "greyHMLightSweater",
+        "category": "top",
+        "generalType": "longSleeves",
+        "subType": "lightSweater",
+        "colour": "grey",
+        "weatherIndex": "4",
+        "picURL": "lightSweater.jpg",
+        "brand": "HM",
+        "url": "http://www.hm.com/ca/product/06130?article=06130-A#article=06130-R"
+    },
+
+    {
+        "user": "marySue",
+        "name": "floralTank",
+        "category": "top",
+        "generalType": "shortSleeves",
+        "subType": "tank",
+        "colour": "floral",
+        "weatherIndex": "1",
+        "picURL": "floralTankTop.jpg",
+        "brand": "Zara",
+        "url": "http://www.zara.com/us/en/woman/tops/printed-lace-top-c437590p1499580.html"
+    },
+
+    {
+        "user": "marySue",
+        "name": "blueJeans",
+        "category": "bottoms",
+        "generalType": "long",
+        "subType": "pants",
+        "weatherIndex": "4",
+        "picURL": "blueJeans.jpg",
+        "brand": "Zara",
+        "url": "http://www.zara.com/us/en/woman/trousers/jeans-c437617p1344515.html"
+    },
+
+    {
+        "user": "marySue",
+        "name": "blackAnkleBoots",
+        "category": "feet",
+        "generalType": "boots/shoes",
+        "subType": "ankleBoots",
+        "weatherIndex": "1.5",
+        "picURL": "blackAnkleBoots.jpg",
+        "brand": "Aldo",
+        "url": "http://www.aldoshoes.com/us/women/boots/ankle-boots/97480556-rusova/93"
+    }
+]
