@@ -150,3 +150,43 @@ html, body, #map-canvas {
 	cursor:pointer;
 }
 
+
+#modal{
+	position:absolute;
+	height:500px;
+	width:700px;
+	border:1px solid;
+	border-radius: 20px;
+	left:50%;
+	top:50%;
+	margin-top:-250px;
+	margin-left:-350px;
+	background-color: beige;
+	padding:50px;
+
+}
+
+
+#modal>label{
+	display:inline-block;
+	width:100%;
+}
+
+#modal>label>input{
+	float:right;
+	width:70%;
+}
+
+#addThis{
+	height:50px;
+	width:200px;
+	border: 1px solid;
+	text-align: center;
+	line-height: 50px;
+	position:relative;
+	left:50%;
+	margin-left:-100px;
+}
+.clear{
+	clear:both;
+}

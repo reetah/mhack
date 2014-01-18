@@ -200,6 +200,8 @@ var loadCloset = function(closet) {
     }
 }
 
-
+var showAdd = function() {
+    $("#modal").slideDown();
+}
 
 //binder
