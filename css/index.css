@@ -191,3 +191,8 @@ html, body, #map-canvas {
 .clear{
 	clear:both;
 }
+
+#dropDown{
+	width:500px;
+	border:1px solid;
+}
