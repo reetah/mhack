@@ -186,6 +186,7 @@ html, body, #map-canvas {
 	position:relative;
 	left:50%;
 	margin-left:-100px;
+	cursor:pointer;
 }
 .clear{
 	clear:both;

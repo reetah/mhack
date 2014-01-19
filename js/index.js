@@ -204,4 +204,35 @@ var showAdd = function() {
     $("#modal").slideDown();
 }
 
+
+var addThis = function() {
+    console.log("add this cloth");
+
+    var item = {};
+    item.brand = "testing";
+    item.category = "top";
+    item.color = "red";
+    item.generalType = "jacket";
+    item.name = "testing";
+    item.picURL = "test.jpg";
+    item.resource_uri = "test.jpg";
+    item.subType = "heavyJacket";
+    item.url = "testin.html";
+    item.weatherIndex = 20;
+
+
+    $.ajax({
+        url: 'http://localhost:8000/api/clothing/',
+        type: 'POST',
+        data: item,
+        dataType: "json",
+
+        ContentType: 'application/json; charset=utf-8',
+        success: function(data) {
+            console.log(data);
+        },
+
+    });
+
+}
 //binder
