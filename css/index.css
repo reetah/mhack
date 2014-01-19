@@ -30,7 +30,7 @@
 }
 
 #confirm{
-    display: inline-block;
+    display: none;
 	
     width: 100px;
     height: 50px;
@@ -66,19 +66,19 @@ html, body, #map-canvas {
 #categories{
 	width:100%;
 	height:100px;
-	background-color: red;
+
 }
 
 #types{
 	width:100%;
 	height:100px;
-	background-color: blue;
+	
 }
 
 #subtypes{
 	width:100%;
 	height:100px;
-	background-color: yellow;
+	
 }
 
 
@@ -92,42 +92,56 @@ html, body, #map-canvas {
 
 .category{
 	height:calc( 100% - 2px);
-	display:inline-block;
-	font-size: 2vw;
+	display: inline-block;
+	/* border: 1px solid; */
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
 	text-align: center;
-	line-height: 100px;
-	border:solid 1px;
-	cursor:pointer;
 }
 .category:hover{
 	background-color: pink;
 }
+.category>img{
+	height:100%;
+}
 
 .type{
-	height:calc(100% - 2px);
-	display:inline-block;
-	font-size: 2vw;
+	height:calc( 100% - 2px);
+	display: inline-block;
+	border: 1px solid;
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
 	text-align: center;
-	line-height: 100px;
-	border:solid 1px;
-	cursor:pointer;
 }
 .type:hover{
 	background-color: cyan;
+}
+.type>img{
+	height:100%;
 }
 
 .subtype{
 	height:calc(100% - 2px);
 	display:inline-block;
-	
+	border: 1px solid;
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
 	text-align: center;
-	line-height: 100px;
-	border:solid 1px;
-	cursor:pointer;
 
 }
 .subtype:hover{
 	background-color: beige;
+}
+.subtype>img{
+	max-height:100%;
+	max-width:100%;
+	vertical-align: middle;
 }
 
 #addCloth{
@@ -245,7 +259,8 @@ html, body, #map-canvas {
 
 
 #top{
-	height:150px;
+	height: 150px;
+	width:10000px;
 	border:1px solid;
 }
 
@@ -260,5 +275,29 @@ html, body, #map-canvas {
 }
 
 .selected{
-	background-color: red;
+	
+}
+
+.right{
+	height:100%;
+	display:inline-block;
+}
+.right>img{
+	height:100%;
+}
+#result{
+    width: 100%;
+	
+    height: 144px;
+    font-size: 200%;
+    text-align: center;
+    text-align: center;
+    line-height: 140px;
+}
+
+#inner-type{
+	font-size:200%;
+	line-height: 50px;
+	margin: 0 auto;
+	text-align: center;
 }

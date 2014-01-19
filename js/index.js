@@ -1,8 +1,7 @@
-var launch = function() {
-    console.log("let's do this!");
-}
 var selected = [];
 var forecast;
+var index;
+var temp_c = 0;
 var getForecast = function(state, airport) {
     $.ajax({
         url: "http://api.wunderground.com/api/6a636cdd571ca60f/forecast/q/" + state + "/" + airport + ".json",
@@ -24,7 +23,8 @@ var getWeather = function(state, airport) {
         success: function(parsed_json) {
             var location = parsed_json['location']['city'];
             var temp_f = parsed_json['current_observation']['temp_f'];
-            alert("Current temperature in " + location + " is: " + temp_f + " F.");
+            temp_c = parsed_json['current_observation']['temp_c'];
+            //alert("Current temperature in " + location + " is: " + temp_f + " F.");
         }
     });
 }
@@ -80,7 +80,7 @@ function initialize() {
             console.log(pos);
             posi = pos;
             map.setCenter(pos);
-            //getStation(pos.d, pos.e);
+            getStation(pos.d, pos.e);
         }, function() {
             handleNoGeolocation(true);
         });
@@ -121,6 +121,12 @@ $(document).ready(function() {
         dropLoadSubtype("jacket");
     });
 
+    $.getJSON("data/index.json", function(data) {
+        console.log(data);
+        index = data;
+
+    });
+
 
     $.getJSON("http://localhost:8000/api/clothing/?limit=0", function(data) {
         console.log(data);
@@ -144,11 +150,15 @@ $(document).ready(function() {
 
 var loadCategories = function(typeData) {
     console.log(typeData);
-    for (var i = 0; i < typeData.length; i++) {
-        $("#categories").append("<div class='category' onclick='loadType(\"" + typeData[i].label + "\");'>" + typeData[i].label + "</div>")
-    }
 
-    $(".category").css("width", "calc(" + 1 / typeData.length * 100 + "% - 2px");
+    for (var i = 0; i < typeData.length; i++) {
+        $("#categories").append("<div class='category' onclick='loadType(\"" + typeData[i].label + "\");'><img src='data/pictures/categories/" + typeData[i].label + ".gif'></div>")
+
+    }
+    //$(".category").css("width", "100%");
+    $(".category").css("width", 1 / typeData.length * 100 + "%");
+
+
 
 
 }
@@ -168,11 +178,18 @@ var loadType = function(type) {
     }
     $("#types").html("");
     for (var i = 0; i < currentType.type.length; i++) {
-        $("#types").append("<div class = 'type' onclick='loadSubtype(\"" + currentType.type[i].label + "\");'>" + currentType.type[i].label + "</div>")
+        $("#types").append("<div class = 'type' onclick='loadSubtype(\"" + currentType.type[i].label + "\");'><img src='data/pictures/types/" + currentType.type[i].label + ".jpg'></div>")
     }
-
+    //$(".type").css("width", "100%");
     $(".type").css("width", "calc(" + 1 / currentType.type.length * 100 + "% - 2px");
     $("#subtypes").html("");
+    $("#selection").html("")
+    for (var i = 0; i < closet.length; i++) {
+        if (closet[i].category == type) {
+            $("#selection").append("<div class='cloth' id='" + closet[i].id + "'style='background-image:url(" + closet[i].picURL + ")'></div>");
+        }
+    }
+
 }
 
 var loadSubtype = function(subType) {
@@ -188,14 +205,26 @@ var loadSubtype = function(subType) {
     $("#subtypes").html("");
     //          console.log(currentSubTypes[0].label);
     for (var i = 0; i < currentSubTypes.length; i++) {
-        $("#subtypes").append("<div class = 'subtype' onclick = 'loadClothes(\"" + currentSubTypes[i].label + "\");'>" + currentSubTypes[i].label + "</div>")
+        $("#subtypes").append("<div class = 'subtype' onclick = 'loadClothes(\"" + currentSubTypes[i].label + "\");'><img src='data/pictures/subtypes/" + currentSubTypes[i].label + ".jpg'></div>")
     }
     $(".subtype").css("width", "calc(" + 1 / currentSubTypes.length * 100 + "% - 2px");
     $(".subtype").css("font-size", 600 / currentSubTypes.length + "% ");
+    $("#selection").html("")
+    for (var i = 0; i < closet.length; i++) {
+        if (closet[i].generalType == subType) {
+            $("#selection").append("<div class='cloth' id='" + closet[i].id + "'style='background-image:url(" + closet[i].picURL + ")'></div>");
+        }
+    }
 }
 
 var loadClothes = function(subtype) {
     console.log(subtype);
+    $("#selection").html("")
+    for (var i = 0; i < closet.length; i++) {
+        if (closet[i].subType == subtype) {
+            $("#selection").append("<div class='cloth' id='" + closet[i].id + "'style='background-image:url(" + closet[i].picURL + ")'></div>");
+        }
+    }
 }
 
 
@@ -309,7 +338,7 @@ var dropLoadSubtype = function(type) {
         $("#select3").append("<option value=\"" + currentSubType[i].label + "\">" + currentSubType[i].label + "</option>");
     }
 }
-
+var score;
 
 var toggleCloth = function(clothID) {
     console.log(clothID);
@@ -321,19 +350,61 @@ var toggleCloth = function(clothID) {
     $("#top").html("");
     $("#bottom").html("");
     $("#feet").html("");
+    score = temp_c;
     for (var i = 0; i < closet.length; i++) {
         if (selected.indexOf(closet[i].id.toString()) != -1) { //cloth selected{
             if (closet[i].category == "top") {
-                $("#top").append("<div>" + closet[i].name + "</div>")
+                $("#top").append("<div class='right' onclick='removeCloth(" + closet[i].id + ")'><img src='" + closet[i].picURL + "'</div>")
             }
             if (closet[i].category == "bottom") {
-                $("#bottom").append("<div>" + closet[i].name + "</div>")
+                $("#bottom").append("<div class='right' onclick='removeCloth(" + closet[i].id + ")'><img src='" + closet[i].picURL + "'</div>")
             }
             if (closet[i].category == "feet") {
-                $("#feet").append("<div>" + closet[i].name + "</div>")
+                $("#feet").append("<div class='right' onclick='removeCloth(" + closet[i].id + ")'><img src='" + closet[i].picURL + "'</div>")
             }
+            indexName = closet[i].subType;
+            score += index[indexName];
         }
     }
+    updateStatus();
 
+}
 
+var removeCloth = function(clothID) {
+    console.log(clothID);
+    selected.splice(selected.indexOf(clothID.toString()), 1);
+    $("#top").html("");
+    $("#bottom").html("");
+    $("#feet").html("");
+    score = temp_c;
+    for (var i = 0; i < closet.length; i++) {
+        if (selected.indexOf(closet[i].id.toString()) != -1) { //cloth selected{
+            if (closet[i].category == "top") {
+                $("#top").append("<div class='right' onclick='removeCloth(" + closet[i].id + ")'><img src='" + closet[i].picURL + "'</div>")
+            }
+            if (closet[i].category == "bottom") {
+                $("#bottom").append("<div class='right' onclick='removeCloth(" + closet[i].id + ")'><img src='" + closet[i].picURL + "'</div>")
+            }
+            if (closet[i].category == "feet") {
+                $("#feet").append("<div class='right' onclick='removeCloth(" + closet[i].id + ")'><img src='" + closet[i].picURL + "'</div>")
+            }
+            indexName = closet[i].subType;
+            score += index[indexName];
+        }
+    }
+    updateStatus();
+}
+
+var updateStatus = function() {
+    if (score < 15) {
+        $("#result").html("Freezing your ass off");
+    } else if (score < 20) {
+        $("#result").html("Kinda cold, don't stay outside for long");
+    } else if (score < 30) {
+        $("#result").html("Fairly comfortable");
+    } else if (score < 35) {
+        $("#result").html("Kinda warm");
+    } else {
+        $("#result").html("Your insides are melting");
+    }
 }

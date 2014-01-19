@@ -30,7 +30,7 @@
 	<div id="closet">
 
 	 	<div id="categories"></div>
-	 	<div id="types"></div>
+	 	<div id="types"><div id="inner-type">Select category above to filter clothes in your closet</div></div>
 	 	<div id="subtypes"></div>
 
 	 	<div id="selection"></div>
@@ -42,17 +42,19 @@
 		<div id="top"></div>
 		<div id="bottom"></div>
 		<div id="feet"></div>
+		<div id="result"></div>
 	</div>
 
 
-	<div id="modal">
+
+	<div id="modal" style="display:none">
 		<label>Brand<input type="text" id="brand"></input></label>
 		<label>Categories<select id="select1" onchange="selectionChange()"></select></label>
 		<label>Type<select id="select2" onchange="selectionChangeType()"></select></label>
 		<label>Subtype<select id="select3"></select></label>
 		<label>Color<input type="text" id="color"></input></label>
 		<label>Picture URL<input type="text" id="picURL"></input></label>
-
+		
 		
 
 
