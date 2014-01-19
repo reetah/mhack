@@ -47,16 +47,11 @@
 
 	<div id="modal">
 		<label>Brand<input type="text" id="brand"></input></label>
-		
 		<label>Categories<select id="select1" onchange="selectionChange()"></select></label>
 		<label>Type<select id="select2" onchange="selectionChangeType()"></select></label>
 		<label>Subtype<select id="select3"></select></label>
-
-
-		<label>Color<input type="text"></input></label>
-		<label>Name<input type="text"></input></label>
-		<label>Picture<input type="text"></input></label>
-		<label>Url<input type="text"></input></label>
+		<label>Color<input type="text" id="color"></input></label>
+		<label>Picture URL<input type="text" id="picURL"></input></label>
 
 		
 
@@ -64,7 +59,7 @@
 		<br/>
 		<br/>
 		<div id="cancel" onclick="$('#modal').slideUp()">Cancel</div>
-		<div id="addThis" onclick="addThis();">Add Item</div> 
+		<div id="addThis" onclick="addThis();"> Add Item </div> 
 
 	</div>
 </body>

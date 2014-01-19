@@ -213,20 +213,14 @@ var addThis = function() {
     console.log("add this cloth");
 
     var item = {};
-    item.brand = "testing";
-    item.category = "top";
-    item.colour = "red";
-    item.generalType = "jacket";
-    item.name = "testing";
-    item.picURL = "test.jpg";
-    item.resource_uri = "test.jpg";
-    item.subType = "heavyJacket";
-    item.url = "testin.html";
-    item.weatherIndex = 20;
-
-    var data1 = JSON.stringify({
-        "name": "This will prbbly be my lst post.",
-    });
+    item.brand = $( "#brand" ).val();
+    item.category = $( "#select1" ).val();
+    item.colour = $( "#color" ).val();
+    item.generalType = $( "#select2" ).val();
+    item.name = $( "#brand" ).val() + " " + $( "#color" ).val() + " " + $( "#select3" ).val();
+    item.picURL = $( "#picURL" ).val();
+    item.subType = $( "#select3" ).val();
+    item.weatherIndex = 1;
 
     $.ajax({
         url: 'http://localhost:8000/api/clothing/',
