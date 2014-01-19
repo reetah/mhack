@@ -35,7 +35,7 @@
 
 	 	<div id="selection"></div>
 
-	 	<div id="addCloth" onclick="showAdd();">Add cloth</div>
+	 	<div id="addCloth" onclick="showAdd();">Add Clothes</div>
 
 	</div>
 	<div id="wearing">
@@ -48,19 +48,23 @@
 	<div id="modal">
 		<label>Brand<input type="text" id="brand"></input></label>
 		
-		<label>Categories<select id="select"></select></label>
-		<label>Type<select id="select"></select></label>
+		<label>Categories<select id="select1" onchange="selectionChange()"></select></label>
+		<label>Type<select id="select2" onchange="selectionChangeType()"></select></label>
+		<label>Subtype<select id="select3"></select></label>
 
-		
-		<label>Subtype<input type="text"></input></label>
+
 		<label>Color<input type="text"></input></label>
 		<label>Name<input type="text"></input></label>
 		<label>Picture<input type="text"></input></label>
 		<label>Url<input type="text"></input></label>
+
+		
+
+
 		<br/>
 		<br/>
 		<div id="cancel" onclick="$('#modal').slideUp()">Cancel</div>
-		<div id="addThis" onclick="addThis();">Add This Cloth</div> 
+		<div id="addThis" onclick="addThis();">Add Item</div> 
 
 	</div>
 </body>

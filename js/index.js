@@ -244,20 +244,59 @@ var addThis = function() {
 }
 
 
+var selection;
 
-
+var selectionChange = function(){
+    selection = $("#select1").val();
+   // 'dropLoadType(" + typeData[i].label + ");'
+    dropLoadType(selection);
+}
 
 var dropLoadCat = function() {
     for (var i = 0; i < typeData.length; i++) {
-        $("#select").append("<option value=\"" + typeData[i].label + "\">" + typeData[i].label + "</option>")
-    }
+        $("#select1").append("<option value=\"" + typeData[i].label + "\">" + typeData[i].label + "</option>")
+    } 
+   // $("#select1").html("");                                                                    
 }
-
+var currentType;
 var dropLoadType = function(type) {
-    for (var i = 0; i < typeData.type.length; i++) {
-        if (typeData.type[i] == type) {
-            $("#select").append("<option value=\"" + typeData[i].label + "\">" + typeData[i].label + "</option>")
+    console.log('dropLoadType worked');
+    // type = bottom
+    // console.log(typeData.length);
+     console.log('typeData[0]' + typeData[0]);
+    // console.log(type);
+    for (var i = 0; i < typeData.length; i++) {
+        if (typeData[i].label == type) {
+  //          console.log(typeData[i].label);
+            currentType = typeData[i];
+            break;
+
         }
     }
+    console.log(currentType);
+    $("#select2").html("");
+    for (var i = 0; i < currentType.type.length; i++){
+        $("#select2").append("<option value=\"" + currentType.type[i].label + "\">" + currentType.type[i].label + "</option>");
+    } 
 
+}
+
+var selectionChangeType = function(subtype){
+    selection = $("#select2").val();
+    dropLoadSubtype(selection);
+}
+
+var dropLoadSubtype = function(type) {
+    var currentSubType; 
+    for (var i = 0; i < currentType.type.length; i++) {
+        if (currentType.type[i].label == type) {
+            currentSubType = currentType.type[i].subtypes;
+            console.log(currentType);
+            break;
+        }
+    }
+    $("#select3").html("");
+    for (var i = 0; i < currentSubType.length; i++){
+        $("#select3").append("<option value=\"" + currentSubType[i].label + "\">" + currentSubType[i].label + "</option>");
+    } 
 }
