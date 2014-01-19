@@ -1,7 +1,7 @@
 var launch = function() {
     console.log("let's do this!");
 }
-
+var selected = [];
 var forecast;
 var getForecast = function(state, airport) {
     $.ajax({
@@ -117,10 +117,12 @@ $(document).ready(function() {
         typeData = data;
         loadCategories(typeData);
         dropLoadCat();
+        dropLoadType("top");
+        dropLoadSubtype("jacket");
     });
 
 
-    $.getJSON("http://localhost:8000/api/clothing/", function(data) {
+    $.getJSON("http://localhost:8000/api/clothing/?limit=0", function(data) {
         console.log(data);
 
         closet = data.objects;
@@ -129,10 +131,11 @@ $(document).ready(function() {
     });
 
 
-
     $(document).on('click', '.cloth', function(e) {
         e.preventDefault();
-        console.log($(this)[0].id);
+        //console.log($(this)[0].id);
+        toggleCloth($(this)[0].id);
+        $("#" + $(this)[0].id).toggleClass("selected");
     });
 });
 
@@ -199,7 +202,7 @@ var loadClothes = function(subtype) {
 var loadCloset = function(closet) {
     console.log(closet);
     for (var i = 0; i < closet.length; i++) {
-        $("#selection").append("<div class='cloth' id='" + closet[i].id + "'style='background-image:url(data/pictures/" + closet[i].picURL + ")'></div>");
+        $("#selection").append("<div class='cloth' id='" + closet[i].id + "'style='background-image:url(" + closet[i].picURL + ")'></div>");
 
     }
 }
@@ -213,13 +216,13 @@ var addThis = function() {
     console.log("add this cloth");
 
     var item = {};
-    item.brand = $( "#brand" ).val();
-    item.category = $( "#select1" ).val();
-    item.colour = $( "#color" ).val();
-    item.generalType = $( "#select2" ).val();
-    item.name = $( "#brand" ).val() + " " + $( "#color" ).val() + " " + $( "#select3" ).val();
-    item.picURL = $( "#picURL" ).val();
-    item.subType = $( "#select3" ).val();
+    item.brand = $("#brand").val();
+    item.category = $("#select1").val();
+    item.colour = $("#color").val();
+    item.generalType = $("#select2").val();
+    item.name = $("#brand").val() + " " + $("#color").val() + " " + $("#select3").val();
+    item.picURL = $("#picURL").val();
+    item.subType = $("#select3").val();
     item.weatherIndex = 1;
 
     $.ajax({
@@ -229,9 +232,21 @@ var addThis = function() {
         data: JSON.stringify(item),
         dataType: 'json',
         processData: false,
-        success: function(data) {
-            console.log(data);
-        },
+        statusCode: {
+            201: function() {
+                //console.log(data);
+                $("#modal").slideUp();
+                $.getJSON("http://localhost:8000/api/clothing/?limit=0", function(data) {
+                    console.log(data);
+
+                    closet = data.objects;
+                    loadCloset(closet);
+
+                });
+            }
+        }
+
+
 
     });
 
@@ -240,28 +255,28 @@ var addThis = function() {
 
 var selection;
 
-var selectionChange = function(){
+var selectionChange = function() {
     selection = $("#select1").val();
-   // 'dropLoadType(" + typeData[i].label + ");'
+    // 'dropLoadType(" + typeData[i].label + ");'
     dropLoadType(selection);
 }
 
 var dropLoadCat = function() {
     for (var i = 0; i < typeData.length; i++) {
         $("#select1").append("<option value=\"" + typeData[i].label + "\">" + typeData[i].label + "</option>")
-    } 
-   // $("#select1").html("");                                                                    
+    }
+    // $("#select1").html("");                                                                    
 }
 var currentType;
 var dropLoadType = function(type) {
     console.log('dropLoadType worked');
     // type = bottom
     // console.log(typeData.length);
-     console.log('typeData[0]' + typeData[0]);
+    console.log('typeData[0]' + typeData[0]);
     // console.log(type);
     for (var i = 0; i < typeData.length; i++) {
         if (typeData[i].label == type) {
-  //          console.log(typeData[i].label);
+            //          console.log(typeData[i].label);
             currentType = typeData[i];
             break;
 
@@ -269,19 +284,19 @@ var dropLoadType = function(type) {
     }
     console.log(currentType);
     $("#select2").html("");
-    for (var i = 0; i < currentType.type.length; i++){
+    for (var i = 0; i < currentType.type.length; i++) {
         $("#select2").append("<option value=\"" + currentType.type[i].label + "\">" + currentType.type[i].label + "</option>");
-    } 
+    }
 
 }
 
-var selectionChangeType = function(subtype){
+var selectionChangeType = function(subtype) {
     selection = $("#select2").val();
     dropLoadSubtype(selection);
 }
 
 var dropLoadSubtype = function(type) {
-    var currentSubType; 
+    var currentSubType;
     for (var i = 0; i < currentType.type.length; i++) {
         if (currentType.type[i].label == type) {
             currentSubType = currentType.type[i].subtypes;
@@ -290,7 +305,35 @@ var dropLoadSubtype = function(type) {
         }
     }
     $("#select3").html("");
-    for (var i = 0; i < currentSubType.length; i++){
+    for (var i = 0; i < currentSubType.length; i++) {
         $("#select3").append("<option value=\"" + currentSubType[i].label + "\">" + currentSubType[i].label + "</option>");
-    } 
+    }
+}
+
+
+var toggleCloth = function(clothID) {
+    console.log(clothID);
+    if (selected.indexOf(clothID) == -1) {
+        selected.push(clothID);
+    } else {
+        selected.splice(selected.indexOf(clothID), 1);
+    }
+    $("#top").html("");
+    $("#bottom").html("");
+    $("#feet").html("");
+    for (var i = 0; i < closet.length; i++) {
+        if (selected.indexOf(closet[i].id.toString()) != -1) { //cloth selected{
+            if (closet[i].category == "top") {
+                $("#top").append("<div>" + closet[i].name + "</div>")
+            }
+            if (closet[i].category == "bottom") {
+                $("#bottom").append("<div>" + closet[i].name + "</div>")
+            }
+            if (closet[i].category == "feet") {
+                $("#feet").append("<div>" + closet[i].name + "</div>")
+            }
+        }
+    }
+
+
 }
