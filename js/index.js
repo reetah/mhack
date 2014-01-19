@@ -234,7 +234,6 @@ var addThis = function() {
         data: JSON.stringify(item),
         dataType: 'json',
         processData: false,
-
         success: function(data) {
             console.log(data);
         },
