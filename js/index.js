@@ -120,9 +120,10 @@ $(document).ready(function() {
     });
 
 
-    $.getJSON("data/mock.json", function(data) {
-        //console.log(data);
-        closet = data;
+    $.getJSON("http://localhost:8000/api/clothing/", function(data) {
+        console.log(data);
+
+        closet = data.objects;
         loadCloset(closet);
 
     });
@@ -198,7 +199,7 @@ var loadClothes = function(subtype) {
 var loadCloset = function(closet) {
     console.log(closet);
     for (var i = 0; i < closet.length; i++) {
-        $("#selection").append("<div class='cloth' id='" + closet[i].name + "'style='background-image:url(data/pictures/" + closet[i].picURL + ")'></div>");
+        $("#selection").append("<div class='cloth' id='" + closet[i].id + "'style='background-image:url(data/pictures/" + closet[i].picURL + ")'></div>");
 
     }
 }
