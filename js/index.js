@@ -230,7 +230,6 @@ var addThis = function() {
     $.ajax({
         url: 'http://localhost:8000/api/clothing/',
         type: 'POST',
-
         contentType: 'application/json',
         data: JSON.stringify(item),
         dataType: 'json',
