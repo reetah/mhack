@@ -223,14 +223,19 @@ var addThis = function() {
     item.url = "testin.html";
     item.weatherIndex = 20;
 
+    var data1 = JSON.stringify({
+        "name": "This will prbbly be my lst post.",
+    });
 
     $.ajax({
         url: 'http://localhost:8000/api/clothing/',
         type: 'POST',
-        data: JSON.stringify(item),
-        dataType: "json",
 
-        ContentType: 'application/json; charset=utf-8',
+        contentType: 'application/json',
+        data: JSON.stringify(item),
+        dataType: 'json',
+        processData: false,
+
         success: function(data) {
             console.log(data);
         },
@@ -238,7 +243,6 @@ var addThis = function() {
     });
 
 }
-//binder
 
 
 
