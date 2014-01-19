@@ -244,18 +244,26 @@ var addThis = function() {
 }
 
 
+var selection;
 
+var selectionChange = function(){
+    selection = $("#select").val();
+   // 'dropLoadType(" + typeData[i].label + ");'
+    dropLoadType(selection);
 
+}
 
 var dropLoadCat = function() {
     for (var i = 0; i < typeData.length; i++) {
         $("#select").append("<option value=\"" + typeData[i].label + "\">" + typeData[i].label + "</option>")
     }
+                                                                        
 }
 
 var dropLoadType = function(type) {
-    for (var i = 0; i < typeData.type.length; i++) {
-        if (typeData.type[i] == type) {
+    console.log('dropLoadType worked');
+    for (var i = 0; i < typeData.length; i++) {
+        if (typeData[i] == type) {
             $("#select").append("<option value=\"" + typeData[i].label + "\">" + typeData[i].label + "</option>")
         }
     }

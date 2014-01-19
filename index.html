@@ -35,7 +35,7 @@
 
 	 	<div id="selection"></div>
 
-	 	<div id="addCloth" onclick="showAdd();">Add cloth</div>
+	 	<div id="addCloth" onclick="showAdd();">Add Clothes</div>
 
 	</div>
 
@@ -43,7 +43,7 @@
 	<div id="modal">
 		<label>Brand<input type="text"></input></label>
 		
-		<label>Categories<select id="select"></select></label>
+		<label>Categories<select id="select" onchange="selectionChange()"></select></label>
 		<label>Type<select id="select"></select></label>
 
 		
@@ -53,7 +53,7 @@
 		<label>Picture<input type="text"></input></label>
 		<label>Url<input type="text"></input></label>
 		
-		<div id="addThis" onclick="addThis();">Add This Cloth</div> 
+		<div id="addThis" onclick="addThis();">Add Item</div> 
 
 	</div>
 </body>
