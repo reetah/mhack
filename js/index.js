@@ -207,7 +207,6 @@ var showAdd = function() {
     $("#modal").slideDown();
 }
 
-<<<<<<< HEAD
 
 var addThis = function() {
     console.log("add this cloth");
@@ -215,7 +214,7 @@ var addThis = function() {
     var item = {};
     item.brand = "testing";
     item.category = "top";
-    item.color = "red";
+    item.colour = "red";
     item.generalType = "jacket";
     item.name = "testing";
     item.picURL = "test.jpg";
@@ -228,7 +227,7 @@ var addThis = function() {
     $.ajax({
         url: 'http://localhost:8000/api/clothing/',
         type: 'POST',
-        data: item,
+        data: JSON.stringify(item),
         dataType: "json",
 
         ContentType: 'application/json; charset=utf-8',
@@ -240,9 +239,6 @@ var addThis = function() {
 
 }
 //binder
-=======
-//binder
-
 
 
 
@@ -250,16 +246,15 @@ var addThis = function() {
 
 var dropLoadCat = function() {
     for (var i = 0; i < typeData.length; i++) {
-        $("#select").append("<option value=\"" + typeData[i].label + "\">"+typeData[i].label+"</option>")
-    } 
+        $("#select").append("<option value=\"" + typeData[i].label + "\">" + typeData[i].label + "</option>")
+    }
 }
 
 var dropLoadType = function(type) {
-    for (var i = 0; i < typeData.type.length; i++){
+    for (var i = 0; i < typeData.type.length; i++) {
         if (typeData.type[i] == type) {
-            $("#select").append("<option value=\"" + typeData[i].label + "\">"+typeData[i].label+"</option>")
+            $("#select").append("<option value=\"" + typeData[i].label + "\">" + typeData[i].label + "</option>")
         }
     }
 
 }
->>>>>>> 7a9f12d739233ac53ae236aee45d8bbdbff0cbde
