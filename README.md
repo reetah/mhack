@@ -1,0 +1,1 @@
+An innovative web application that allows users to keep track of their closet and verify whether their outfit of the day (#ootf for short) is weather appropriate, as predicted by the Weather Underground API and their current location.
